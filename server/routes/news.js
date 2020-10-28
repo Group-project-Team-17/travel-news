@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const NewsController = require('../controllers/news-controller')
-
-router.get('/', NewsController.showAll)
+const Auth = require("../middlewares/authentication")
+//Add Auth to /news
+router.get('/', Auth.authentication, NewsController.showAll)
 
 module.exports = router

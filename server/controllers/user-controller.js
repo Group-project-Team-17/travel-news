@@ -1,4 +1,6 @@
 const { User } = require('../models/')
+const bcrypt = require("../helpers/bcrypt")
+const jwt = require("../helpers/jwt")
 
 class UserController {
     static async postRegisterUser(req, res, next) {
@@ -20,16 +22,15 @@ class UserController {
         try {
             const userEmail = req.body.email
             const userPassword = req.body.password
-
             const userLogin = await User.findOne({ where: { email: userEmail }})
-            if (!userLogin) {
-                throw { name: 'Email atau Password salah' }
-            } else {
-                if (userPassword == userLogin.password) {
-                    res.status(200).json({ userLogin })
-                } else {
-                    throw { name: 'Email atau Password salah' }
-                }
+            //Decrypt password dari hasil findOne
+            const pass = bcrypt.checkPassword(userPassword,userLogin.password)
+            //Jika userLogin dan hasil decrypt true maka akan generate token jwt
+            if(userLogin && pass){
+                let accessToken = jwt.signToken({id:userLogin.id,email:userLogin.email})
+                res.status(200).json({accessToken})
+            }else{
+                throw {name:'Email atau Password salah'}
             }
         } catch (error) {
             next(error)

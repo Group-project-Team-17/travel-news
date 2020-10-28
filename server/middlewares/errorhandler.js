@@ -1,7 +1,7 @@
 const errStatusJoin = require('../helpers/errstatusjoin')
 
 module.exports = (err, req, res, next) => {
-    console.log(err);
+
     const errName = err.name
     const errErrors = err.errors
 
@@ -15,6 +15,9 @@ module.exports = (err, req, res, next) => {
     // * Custom Error Message
     const loginErr = `Email atau Password salah`
 
+    //Custom Auth Error Message
+    const authErr = 'You dont have access'
+
     switch(errName) {
         case uniqueErr:
             message = errStatusJoin(errErrors)
@@ -27,6 +30,10 @@ module.exports = (err, req, res, next) => {
         case loginErr:
             message = loginErr
             status = 401
+            break
+        case authErr:
+            message = authErr
+            status = 403
             break
     }
 
