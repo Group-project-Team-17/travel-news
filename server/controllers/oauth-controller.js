@@ -30,15 +30,16 @@ class OauthController {
             const githubNewUser = {
                 email: getResult.data.email,
                 password: getResult.data.node_id.substring(0, 15),
-                full_name: getResult.data.full_name
+                full_name: getResult.data.name
             }
 
             const findUser = await User.findOne({ where: { email: githubExistUser.email }})
-            const pass = bcrypt.checkPassword(githubExistUser.password, findUser.password)
-
-            if (findUser && pass) {
-                const accessToken = jwt.signToken({ email: findUser.email, full_name: findUser.full_name })
-                res.status(200).json({ accessToken }) // * Kalo user nya ketemu, buat access Token yang berisi email + full_name
+            if (findUser) {
+                const pass = bcrypt.checkPassword(githubExistUser.password, findUser.password)
+                if (pass) {
+                    const accessToken = jwt.signToken({ email: findUser.email, full_name: findUser.full_name })
+                    res.status(200).json({ accessToken }) // * Kalo user nya ketemu, buat access Token yang berisi email + full_name
+                }
             } else {
                 const createUser = await User.create(githubNewUser)
                 const accessToken = jwt.signToken({ email: createUser.email, full_name: createUser.full_name })
