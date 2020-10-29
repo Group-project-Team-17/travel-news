@@ -5,14 +5,15 @@ class OauthController {
         try {
             const requestToken = req.query.code
             const getAccessToken = await axios({
-                method: 'post',
-                url: `https://github.com/login/oauth/access_token?client_id=c479c6b7eaaad9a3ea00&client_secret=178d2d17b59b68935b8d2c87c4ad666f831f35df&code=${requestToken}`,
+                method: 'POST',
+                url: `${process.env.PRIV8_GITHUB_OAUTH_URL}?client_id=${process.env.PRIV8_GITHUB_CLIENT_ID}&client_secret=${process.env.PRIV8_GITHUB_CLIENT_SECRET}&code=${requestToken}`,
             })
             
             const accessToken = getAccessToken.data.substring(getAccessToken.data.indexOf('=') + 1, getAccessToken.data.indexOf('&'))
                 
 
             const getResult = await axios({
+                method: 'GET',
                 url: 'https://api.github.com/user',
                 headers: {
                     Authorization: `Bearer ${accessToken}`
