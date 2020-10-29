@@ -8,5 +8,6 @@ router.get('/', Auth.authentication, AppController.getIndex)
 router.post('/register', UserController.postRegisterUser)
 router.post('/login', UserController.postLoginUser)
 router.post('/googlelogin', UserController.googleLogin)
+router.get('/githublogin', UserController.githubLogin)
 
 module.exports = router
