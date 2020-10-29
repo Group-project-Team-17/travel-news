@@ -23,12 +23,17 @@ class UserController {
             const userEmail = req.body.email
             const userPassword = req.body.password
             const userLogin = await User.findOne({ where: { email: userEmail }})
-            //Decrypt password dari hasil findOne
-            const pass = bcrypt.checkPassword(userPassword,userLogin.password)
-            //Jika userLogin dan hasil decrypt true maka akan generate token jwt
-            if(userLogin && pass){
-                let accessToken = jwt.signToken({id:userLogin.id,email:userLogin.email})
-                res.status(200).json({accessToken})
+            //Cek apakah user ada atau tidak
+            if(userLogin){
+                //Decrypt password dari hasil findOne
+                const pass = bcrypt.checkPassword(userPassword,userLogin.password)
+                //Cek password benar atau tidak
+                if(pass){
+                    let accessToken = jwt.signToken({id:userLogin.id,email:userLogin.email})
+                    res.status(200).json({accessToken})
+                }else{
+                    throw {name:'Email atau Password salah'}
+                }
             }else{
                 throw {name:'Email atau Password salah'}
             }
