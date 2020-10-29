@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a id="github-oauth" href="/">Login with github</a>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $('#github-oauth').on('click', e => {
+            e.preventDefault()
+            window.open('https://github.com/login/oauth/authorize?client_id=c479c6b7eaaad9a3ea00')
+        })
+    </script>
+</body>
+</html>
