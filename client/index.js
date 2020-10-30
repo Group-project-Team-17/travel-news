@@ -62,7 +62,7 @@ function login(ev){
         $("#weatherr").show()
       })
       .fail(err=>{
-        fetchError(err.responseJSON.msg)
+        fetchErrorLogin(err.responseJSON.msg)
     })
 }
 
@@ -83,7 +83,7 @@ function register(ev){
         $('#register').hide()
       })
       .fail(err=>{
-        fetchError(err.responseJSON.msg)
+        fetchErrorRegister(err.responseJSON.msg)
     })
 }
 
@@ -221,7 +221,7 @@ function onSignIn(googleUser) {
         showWeather(response.accessToken)
     })
     .fail(err =>{
-        fetchError(err.responseJSON.msg)
+        fetchErrorLogin(err.responseJSON.msg)
     })
 
   }
@@ -235,8 +235,14 @@ function logout() {
     $("#login").show()
 }
 
-//fetch Error
-function fetchError(text) {
-    $("#error").empty()
-    $("#error").append(text)
+//fetch Error Login
+function fetchErrorLogin(text) {
+    $("#error-login").empty()
+    $("#error-login").append(text)
+}
+
+//fetch Error Register
+function fetchErrorRegister(text) {
+    $("#error-register").empty()
+    $("#error-register").append(text)
 }
