@@ -233,5 +233,20 @@ function fetchErrorRegister(text) {
 
 $('#github-oauth').on('click', e => {
     e.preventDefault()
-    window.open('https://github.com/login/oauth/authorize?client_id=c479c6b7eaaad9a3ea00')
+    const login = window.open('https://github.com/login/oauth/authorize?client_id=c479c6b7eaaad9a3ea00') 
+    let timer = setInterval(function() { 
+        if(login.closed) {
+            clearInterval(timer)
+            const accessToken = localStorage.getItem('accessToken')
+            if (accessToken) {
+                $("#login").hide()
+                $("#home").show()
+                $("#newss").show()
+                $("#weatherr").show()
+                showNewsAndWeather(accessToken)
+            } else {
+                fetchErrorLogin('Login via Github Gagal')
+            }
+        }
+    }, 1000)
 })

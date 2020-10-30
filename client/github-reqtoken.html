@@ -15,9 +15,11 @@
         })
             .done(data => {
                 console.log(data);
+                localStorage.setItem('accessToken', data.accessToken)
+                window.close()
             })
             .fail(err => {
-                console.log(err);
+                window.close()
             })
     </script>
 </body>
