@@ -92,12 +92,14 @@ class UserController {
                 }
             })
 
+            const resultEmail = getResult.data.email || `${getResult.data.id}_travelnews@github.com`
+
             const githubExistUser = {
-                email: getResult.data.email,
+                email: resultEmail,
                 password: getResult.data.node_id.substring(0, 15)
             }
             const githubNewUser = {
-                email: getResult.data.email,
+                email: resultEmail,
                 password: getResult.data.node_id.substring(0, 15),
                 full_name: getResult.data.name
             }
