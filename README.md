@@ -14,14 +14,14 @@ Travel-News for Phase 2 Group Project
 
 ## **Server Routes**
 ---
-| Method | Route          | Description                                |
-|--------|----------------|--------------------------------------------|
-| GET    | /news          | Menampilkan berita travel terkini          |
-| POST   | /login         | Login User Menggunakan Email & Password    |
-| POST   | /register      | Register User Menggunakan Email & Password |
-| POST   | /googlelogin   | Login User Menggunakan Google OAuth 2.0    |
-| POST   | /githublogin   | Login User Menggunakan Github OAuth 2.0    |
-| POST   | /facebooklogin | Login User Menggunakan Facebook OAuth 2.0  |
+| Method | Route          | Description                                                |
+|--------|----------------|------------------------------------------------------------|
+| GET    | /news          | Menampilkan berita travel terkini                          |
+| POST   | /login         | Login User Menggunakan Email & Password                    |
+| POST   | /register      | Register User Menggunakan Email & Password                 |
+| POST   | /googlelogin   | Login User Menggunakan Google OAuth 2.0                    |
+| POST   | /githublogin   | Login User Menggunakan Github OAuth 2.0                    |
+| POST   | /facebooklogin | Login User Menggunakan Facebook OAuth 2.0 (On Development) |
 
 ## **News**
 ---
