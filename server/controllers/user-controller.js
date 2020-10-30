@@ -108,12 +108,12 @@ class UserController {
             if (findUser) {
                 const pass = bcrypt.checkPassword(githubExistUser.password, findUser.password)
                 if (pass) {
-                    const accessToken = jwt.signToken({ email: findUser.email, full_name: findUser.full_name })
+                    const accessToken = jwt.signToken({ id: findUser.id ,email: findUser.email, full_name: findUser.full_name })
                     res.status(200).json({ accessToken }) // * Kalo user nya ketemu, buat access Token yang berisi email + full_name
                 }
             } else {
                 const createUser = await User.create(githubNewUser)
-                const accessToken = jwt.signToken({ email: createUser.email, full_name: createUser.full_name })
+                const accessToken = jwt.signToken({ id: createUser.id ,email: createUser.email, full_name: createUser.full_name })
                 res.status(200).json({ accessToken }) // * Kalo user nya belum ketemu, buat access Token yang berisi email + full_name
             }
 
