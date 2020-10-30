@@ -11,8 +11,9 @@
     <!-- Login -->
     <div class="container" id="login">
         <form onsubmit="login(event)">
-          <div id="error" class="bg-danger text-white text-center font-weight-bold rounded-sm"></div>
+          <div id="error-login" class="bg-danger text-white text-center font-weight-bold rounded-sm"></div>
         <div style="width: 34%; margin-left: 350px; margin-top: 190px;">
+          <h1>Login</h1>
             <div class="form-group">
               <label for="login-email">Email</label>
               <input type="email" class="form-control" id="login-email" aria-describedby="emailHelp">
@@ -22,26 +23,53 @@
               <label for="password">Password</label>
               <input type="password" class="form-control" id="login-password" >
             </div>
-            <button type="submit" class="btn btn-primary">LOGIN</button>
-            <button type="submit" class="btn btn-primary" style="margin-left: 200px;" id="registertog">REGISTER</button>
-            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+            <div class="row">
+              <div class="col">
+                <button type="submit" class="btn btn-primary form-control">LOGIN</button>
+              </div>
+              <div class="col">
+                <button type="button" class="btn btn-primary form-control" id="registertog">REGISTER</button>
+              </div>
+            </div>
+            <div class="text-center font-weight-bold">
+              <h6>== Another Account ==</h6>
+            </div>
+            <div class="row">
+              <div class="col"></div>
+              <div class="g-signin2 col" data-onsuccess="onSignIn"></div>
+              <div class="col"></div>
+            </div>
             </div> 
           </form>
       </div>
     <!-- end login -->
     <!-- register -->
     <div class="container" id="register">
+      <div id="error-register" class="bg-danger text-white text-center font-weight-bold rounded-sm"></div>
         <form onsubmit="register(event)">
-          <div class="form-group">
-            <label for="email">Email</label><br>
-            <input type="email" name="register-email" id="register-email"><br>
-            <label for="password">Password</label><br>
-            <input type="password" name="register-password" id="register-password"><br>
-            <label for="full_name">Name</label><br>
-            <input type="text" name="register-full_name" id="register-full_name"><br>
+          <div style="width: 34%; margin-left: 350px; margin-top: 190px;">
+            <h1>Register</h1>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="register-email" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="register-password" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="full_name">Name</label>
+              <input type="text" class="form-control" id="register-full_name">
+            </div>
+            <div class="row">
+              <div class="col">
+                <button type="submit" class="btn btn-primary form-control">Register</button>
+              </div>
+              <div class="col">
+                <button type="button" class="btn btn-primary form-control" id="backtog">Back</button>
+              </div>
           </div>
-          <button type="submit" class="btn btn-primary">Register</button>
-          <button type="done" class="btn btn-primary" id="backtog">Back</button>
+          </div>
         </form>
       </div>
       <br>
