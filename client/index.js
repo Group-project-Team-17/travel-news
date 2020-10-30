@@ -3,8 +3,7 @@ const SERVER = 'http://localhost:3000'
 $(document).ready(()=>{
     const accessToken = localStorage.getItem('accessToken');
     if(accessToken){
-        showNews(accessToken)
-        showWeather(accessToken)
+        showNewsAndWeather(accessToken)
         $("#login").hide()
         $("#home").show()
         $("#newss").show()
@@ -54,8 +53,7 @@ function login(ev){
       .done(res=>{
         localStorage.setItem('accessToken', res.accessToken);
         // console.log(res.accessToken)
-        showNews(res.accessToken)
-        showWeather(res.accessToken)
+        showNewsAndWeather(res.accessToken)
         $("#login").hide()
         $("#home").show()
         $("#newss").show()
@@ -115,7 +113,7 @@ function convert(number){
     return hari
 }
 
-function showWeather(accessToken){
+function showNewsAndWeather(accessToken){
     $.ajax({
         method: "GET",
         url: SERVER + "/news",
@@ -124,7 +122,7 @@ function showWeather(accessToken){
          }
       })
       .done(res=>{
-          $('#cuaca').empty()
+            $('#cuaca').empty()
             $('#cuaca').append(
             `
             <div class="col-md-2 offset-md-3">
@@ -132,11 +130,11 @@ function showWeather(accessToken){
             </div>
             <div class="col-md-2">
             <img src="https://openweathermap.org/img/wn/${res.cuaca.current.weather[0].icon}@2x.png" >
-             </div>
-             <div class="col-md-2">
-             <h4 style="margin-top: 35px;">${Math.round(+res.cuaca.current.temp-273)}<sup>
-             o</sup>C</h4>
-             </div>
+            </div>
+            <div class="col-md-2">
+            <h4 style="margin-top: 35px;">${Math.round(+res.cuaca.current.temp-273)}<sup>
+            o</sup>C</h4>
+            </div>
             `
             )
             $('#cuaca2').empty()
@@ -160,43 +158,28 @@ function showWeather(accessToken){
                 </div>
                 `
                 )
-        }    
-      })
-      .fail(err=>{
-        console.log(err)
-    })
-}
+            }
 
-
-function showNews(accessToken){
-    $.ajax({
-        method: "GET",
-        url: SERVER + "/news",
-        headers: { 
-            accessToken
-         }
-      })
-      .done(res=>{
-        //   console.log(res)
-          $('#berita').empty()
-          res.berita.forEach(e=>{
-            let date = e.publish_date.split("T")[0]
-            // console.log(e)
-            $('#berita').append(
-            `
-                <div class="col-md-4">
-                <img src="${e.imageURL}" class="card-img" >
-                 </div>
-                 <div class="col-md-8">
-                 <div class="card-body">
-                   <h5 class="card-title">${e.title}</h5>
-                   <p class="card-text">${e.text}</p>
-                   <p class="card-text"><small class="text-muted">Published Date: ${date}</small></p>
-                 </div>
-                </div>
-            `
-            )
-        })
+            //   console.log(res)
+            $('#berita').empty()
+            res.berita.forEach(e=>{
+                    let date = e.publish_date.split("T")[0]
+                    // console.log(e)
+                    $('#berita').append(
+                    `
+                        <div class="col-md-4">
+                        <img src="${e.imageURL}" class="card-img" >
+                        </div>
+                        <div class="col-md-8">
+                        <div class="card-body">
+                        <h5 class="card-title">${e.title}</h5>
+                        <p class="card-text">${e.text}</p>
+                        <p class="card-text"><small class="text-muted">Published Date: ${date}</small></p>
+                        </div>
+                        </div>
+                    `
+                    )
+                })
       })
       .fail(err=>{
         console.log(err)
@@ -217,8 +200,7 @@ function onSignIn(googleUser) {
         $("#home").show()
         $("#newss").show()
         $("#weatherr").show()
-        showNews(response.accessToken)
-        showWeather(response.accessToken)
+        showNewsAndWeather(response.accessToken)
     })
     .fail(err =>{
         fetchErrorLogin(err.responseJSON.msg)
@@ -246,3 +228,10 @@ function fetchErrorRegister(text) {
     $("#error-register").empty()
     $("#error-register").append(text)
 }
+
+// * Github Oauth
+
+$('#github-oauth').on('click', e => {
+    e.preventDefault()
+    window.open('https://github.com/login/oauth/authorize?client_id=c479c6b7eaaad9a3ea00')
+})

@@ -11,7 +11,7 @@
         const requestToken = window.location.search.substring(window.location.search.indexOf('=') + 1 )
         $.ajax({
             method: 'GET',
-            url: `http://127.0.0.1:3000/github?code=${requestToken}`
+            url: `http://127.0.0.1:3000/githublogin?code=${requestToken}`
         })
             .done(data => {
                 console.log(data);
